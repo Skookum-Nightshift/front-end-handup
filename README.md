@@ -108,6 +108,11 @@ have tuned—and continue to tune—these characteristics.
 * react-resolver
 * jest
 
+#### Starting your engines ####
+
+From `/Users/travisemery/Desktop/nightshift/back-end-handup` run `foreman start`
+From `/Users/travisemery/Desktop/nightshift/front-end-handup` run `npm start`
+
 ## License
 
 This generator and toolchain is MIT Licensed. The projects and tools we bring

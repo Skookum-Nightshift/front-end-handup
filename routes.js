@@ -27,7 +27,7 @@ var routes = (
     <Route name="faq" path="faq" handler={FAQ} />
   	<NotFoundRoute handler={NotFound} />
   </Route>
-
+  
 );
 
 export default routes;

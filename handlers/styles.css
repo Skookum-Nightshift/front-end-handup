@@ -1,0 +1,13 @@
+body {
+   display: flex;
+   justify-content: center;
+}
+
+.pageLinks > ul{
+	list-style-type: none;
+    display: inline-flex;
+}
+
+.pageLinks li{
+	    margin: 0px 10px 0px 10px;
+}

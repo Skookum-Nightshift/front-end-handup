@@ -8,9 +8,13 @@ var {PropTypes} = React;
 class Header extends React.Component {
   render(): ?ReactElement {
 
-    var {children, type, ...props} = this.props,
+  var {children, type, ...props} = this.props,
         className = `Header is-${type}`;
 
+  var style = {
+    height : "100px",
+    width : "100px"
+  };
     return (
       //<a {...props} href={href} className={className}>
       //  {children}
@@ -19,7 +23,7 @@ class Header extends React.Component {
       
       <div class="appLogo">
         <a href="#">
-          <img src="./appLogo.png" alt="Logo"/>
+          <img style={style} src="./public/images/logo.png" alt="Logo"/>
         </a>
       </div>
 

@@ -26,6 +26,7 @@ var routes = (
     <Route name="stories" path="stories" handler={Stories} />
     <Route name="faq" path="faq" handler={FAQ} />
   	<NotFoundRoute handler={NotFound} />
+    <Route name="assets" path="/assets"/>
   </Route>
   
 );

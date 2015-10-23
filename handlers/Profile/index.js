@@ -3,27 +3,29 @@ import {Resolver} from 'react-resolver';
 import Header from 'Header';
 import Footer from 'Footer';
 
-class FAQ extends React.Component {
+class Profile extends React.Component {
 
   render(): ?ReactElement {
     return (
-    	<div>
+      <div className="Profile">
+        
       	<Header />
 
       	<div>
-      		FAQ Body
+      		Profile Body
       	</div>
 
 		<Footer />
-		</div>
+
+      </div>
     );
   }
 }
 
-FAQ.propTypes = {
+Profile.propTypes = {
   // id: React.PropTypes.any.isRequired,
 };
 
-FAQ.displayName = 'FAQ';
+Profile.displayName = 'Profile';
 
-export default FAQ;
+export default Profile;

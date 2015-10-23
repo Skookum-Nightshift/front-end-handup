@@ -1,13 +1,23 @@
 import React from 'react';
 import {Resolver} from 'react-resolver';
+import Header from 'Header';
+import Footer from 'Footer';
 
 class About extends React.Component {
 
   render(): ?ReactElement {
     return (
-      <div className="About">
-        About
-      </div>
+      <div>
+
+      	<Header />
+
+      	<div>
+      		About Body
+      	</div>
+
+		<Footer />
+        
+    </div>
     );
   }
 }

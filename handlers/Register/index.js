@@ -4,6 +4,8 @@ import Button from 'Button';
 import Input from 'Input';
 import {apiPost} from 'requestLib';
 import UserActions from '../../actions/UserActions';
+import Header from 'Header';
+import Footer from 'Footer';
 
 class Register extends React.Component {
 
@@ -60,22 +62,33 @@ class Register extends React.Component {
 
 	render(): ?ReactElement {
 		return (
-		 	<div className="Register">
-			    Register<br/>
-			   
-			    <Input placeholder="First Name" type="text" name="first_name" onInputChange={this.updateState}/>
-				<br/>
-				<Input placeholder="Last Name" type="text" name="last_name" onInputChange={this.updateState}/>
-				<br/>
-				<Input placeholder="email" type="email" name="email" onInputChange={this.updateState}/>
-				<br/>
-				<br/>
-				<Input placeholder="password" type="password" name="password" onInputChange={this.updateState}/>
-				<br/>
-				<Input placeholder="confirm password" type="password" name="password_confirmation" onInputChange={this.updateState}/>
-				<br/>
+			<div id="container">
 
-				<Button onClick={this.handleSubmit} type="pink">Register</Button>
+				<Header />
+
+			 	<div className="Register">
+				    Register<br/>
+				   
+				    <Input placeholder="First Name" type="text" name="first_name" onInputChange={this.updateState}/>
+					<br/>
+					<Input placeholder="Last Name" type="text" name="last_name" onInputChange={this.updateState}/>
+					<br/>
+					<Input placeholder="email" type="email" name="email" onInputChange={this.updateState}/>
+					<br/>
+					<br/>
+					<Input placeholder="password" type="password" name="password" onInputChange={this.updateState}/>
+					<br/>
+					<Input placeholder="confirm password" type="password" name="password_confirmation" onInputChange={this.updateState}/>
+					<br/>
+
+					<Button onClick={this.handleSubmit} type="pink">Register</Button>
+				</div>
+
+				<div>
+					//Put image / story here for two side by side blocks
+				</div>
+
+				<Footer />
 			</div>
 		);
 	}

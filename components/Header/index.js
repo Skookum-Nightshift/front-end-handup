@@ -11,50 +11,43 @@ class Header extends React.Component {
   var {children, type, ...props} = this.props,
         className = `Header is-${type}`;
 
-  var style = {
-    height : "100px",
-    width : "100px"
+
+  var css = {
+    logo: {
+      height : "100px",
+      width : "100px"
+    },
+    topNav : {
+      link : {
+        "margin-left" : "5px",
+        "margin-right" : "5px"
+      },
+      "display": "flex",
+      "justify-content": "space-between"
+    }
   };
+
     return (
-      //<a {...props} href={href} className={className}>
-      //  {children}
-      //</a>
-      <div id="topNav" class="topNav">
-      
-      <div class="appLogo">
-        <a href="#">
-          <img style={style} src="./public/images/logo.png" alt="Logo"/>
-        </a>
-      </div>
+      <div id="topNav" style={css.topNav}>
+        
+        <div style={css.topNav.appLogo}>
+          <a href="#">
+            <img style={css.logo} src="./public/images/logo.png" alt="Logo"/>
+          </a>
+        </div>
 
-      <div class="pageLinks">
-        <ul>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/stories">Stories of Hope</a>
-          </li>
-          <li>
-            <a href="/faq">FAQ</a>
-          </li>
-          <li>
-            <a href="/">Why Gift Cards?</a>
-          </li>
-        </ul>
-      </div>
+        <div style={css.topNav.pageLinks}>
+              <a style={css.topNav.link} href="/about">About</a>
+              <a style={css.topNav.link} href="/stories">Stories of Hope</a>
+              <a style={css.topNav.link} ref="/faq">FAQ</a>
+              <a style={css.topNav.link} href="/whygiftcards">Why Gift Cards?</a>
+        </div>
 
-      <div class="accountLinks">
-        <ul>
-          <li>
-            <a href="register">Create Account</a>
-          </li>
-          <li>
-            <a href="login">Login</a>
-          </li>
-        </ul>
-      </div>
-
+        <div style={css.topNav.accountLinks}>
+              <a style={css.topNav.link} href="register">Create Account</a>
+              <a style={css.topNav.link} href="login">Login</a>
+        </div>
+        
     </div>
     );
   }

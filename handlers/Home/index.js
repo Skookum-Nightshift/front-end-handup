@@ -10,26 +10,19 @@ import HeroSlider from 'HeroSlider';
 
 class Home extends React.Component {
 
- //Put functions here!
- loginButton(){
- 	alert("Yess");
- }
-
  //Render piece, HTML goes here
   render(): ?ReactElement {
-  	var textLogin = "Login";
-    
     return (
 
-      <body>
+      <div>
 
       	<Header />
 
       	<HeroSlider />
 
-		<Footer />
+		    <Footer />
 
-      </body>
+      </div>
 
     );
   }

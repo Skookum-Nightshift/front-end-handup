@@ -4,6 +4,8 @@ import Button from 'Button';
 import Input from 'Input';
 import {apiPost} from 'requestLib';
 import UserActions from '../../actions/UserActions';
+import Header from 'Header';
+import Footer from 'Footer';
 
 class Login extends React.Component {
 
@@ -37,20 +39,31 @@ class Login extends React.Component {
 		this.setState(state);
 	}
 
+	stayLoggedIn(){
+		//Store cookie for user w/ email in it. 
+		$.cookie("cookie", "YES", {path:'/'});
+	}
 
   render(): ?ReactElement {
     return (
-      <div className="Login">
-        Login<br/>Enter user name and password below
-       
-    	<Input placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
-    	<br/>
-    	<Input placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
-    	<br/>
+		<div className="Login">
+		
+			<Header />
 
+			Login<br/>Enter user name and password below
 
-    	<Button onClick={this.handleSubmit} type="pink">Login</Button>
-      </div>
+			<Input  placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
+			<br/>
+			<Input placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
+			<br/>
+			<Input type="checkbox" name="persist"/> Keep me logged in?   	
+			<br/>
+
+			<Button onClick={this.handleSubmit} type="pink">Login</Button>
+
+			<Footer />
+
+		</div>
     );
   }
 }

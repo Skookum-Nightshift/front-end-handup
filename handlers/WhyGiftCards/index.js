@@ -3,7 +3,7 @@ import {Resolver} from 'react-resolver';
 import Header from 'Header';
 import Footer from 'Footer';
 
-class FAQ extends React.Component {
+class WhyGiftCards extends React.Component {
 
   render(): ?ReactElement {
     return (
@@ -11,7 +11,7 @@ class FAQ extends React.Component {
       	<Header />
 
       	<div>
-      		FAQ Body
+      		WhyGiftCards Body
       	</div>
 
 		<Footer />
@@ -20,10 +20,10 @@ class FAQ extends React.Component {
   }
 }
 
-FAQ.propTypes = {
+WhyGiftCards.propTypes = {
   // id: React.PropTypes.any.isRequired,
 };
 
-FAQ.displayName = 'FAQ';
+WhyGiftCards.displayName = 'WhyGiftCards';
 
-export default FAQ;
+export default WhyGiftCards;

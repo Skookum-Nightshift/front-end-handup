@@ -1,3 +1,6 @@
+
+require('./styles.css');
+
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Header from 'Header';
@@ -8,14 +11,16 @@ class WhyGiftCards extends React.Component {
   render(): ?ReactElement {
     return (
     	<div>
+
       	<Header />
 
-      	<div>
+      	<div className="WhyGiftCards">
       		WhyGiftCards Body
       	</div>
 
-		<Footer />
-		</div>
+		  <Footer />
+		
+      </div>
     );
   }
 }

@@ -1,3 +1,6 @@
+
+require('./styles.css');
+
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Header from 'Header';
@@ -7,11 +10,11 @@ class Profile extends React.Component {
 
   render(): ?ReactElement {
     return (
-      <div className="Profile">
+      <div>
         
       	<Header />
 
-      	<div>
+      	<div className="Profile">
       		Profile Body
       	</div>
 

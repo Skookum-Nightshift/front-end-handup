@@ -1,3 +1,5 @@
+require('./styles.css');
+
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Header from 'Header';
@@ -10,11 +12,11 @@ class FAQ extends React.Component {
     	<div>
       	<Header />
 
-      	<div>
+      	<div className="FAQ">
       		FAQ Body
       	</div>
 
-		<Footer />
+		    <Footer />
 		</div>
     );
   }

@@ -1,7 +1,6 @@
-/** @define NotFound; use strict */
+/** @define About; use strict */
 @import 'normalize.css';
 
-.NotFound {
+.About {
 	background-color: #F5F7Fa;
 }
-

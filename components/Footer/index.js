@@ -12,10 +12,13 @@ class Footer extends React.Component {
         className = `Footer is-${type}`;
 
     return (
-      <div>
-        Terms of Service | Privacy Policy
-        <br />
-        Copyright 2015, CHANGE App, All Rights Reserved
+      <div className="Footer">
+        <div className="TOS">
+          <a>Terms of Service</a> | <a>Privacy Policy</a>
+        </div>
+        <div className="COPYRIGHT">
+          <p>Copyright 2015, CHANGE App, All Rights Reserved</p>
+        </div>
       </div>
     );
   }

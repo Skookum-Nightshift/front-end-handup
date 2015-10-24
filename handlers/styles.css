@@ -1,6 +1,9 @@
 body {
    display: flex;
    justify-content: center;
+   background-color: #CCD1D9;
+   flex-direction: column;
+   width: 960px;
 }
 
 .pageLinks > ul{

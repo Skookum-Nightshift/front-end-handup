@@ -1,3 +1,6 @@
+
+require('./styles.css');
+
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Button from 'Button';
@@ -62,7 +65,7 @@ class Register extends React.Component {
 
 	render(): ?ReactElement {
 		return (
-			<div id="container">
+			<div>
 
 				<Header />
 

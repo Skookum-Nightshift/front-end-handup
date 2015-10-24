@@ -1,3 +1,6 @@
+
+require('./styles.css');
+
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Header from 'Header';
@@ -11,11 +14,11 @@ class About extends React.Component {
 
       	<Header />
 
-      	<div>
+      	<div className="About">
       		About Body
       	</div>
 
-		<Footer />
+		    <Footer />
         
     </div>
     );

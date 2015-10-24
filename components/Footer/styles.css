@@ -1,29 +1,18 @@
-/** @define Anchor; use strict */
-
-.Anchor {
+.Footer{
+	background-color: #434A54;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.Anchor.is-black {
+.Footer a {
+	color: #F5F7Fa;
 }
 
-.Anchor.is-pink {
+.Footer .TOS{
+	color: #F5F7Fa;
 }
 
-.Anchor.is-grey {
-}
-
-.Anchor.is-white {
-}
-
-
-.Anchor.is-black:hover {
-}
-
-.Anchor.is-pink:hover {
-}
-
-.Anchor.is-grey:hover {
-}
-
-.Anchor.is-white:hover {
+.Footer .COPYRIGHT {
+	color: #F5F7Fa;
 }

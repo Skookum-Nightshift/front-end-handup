@@ -1,0 +1,15 @@
+/** @define Login; use strict */
+@import 'normalize.css';
+
+.LoginForm {
+	background-color: #F5F7Fa;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	justify-content: center;
+}
+
+.LoginForm .Input {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

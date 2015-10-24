@@ -1,3 +1,5 @@
+require('./styles.css');
+	
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Button from 'Button';
@@ -46,20 +48,20 @@ class Login extends React.Component {
 
   render(): ?ReactElement {
     return (
-		<div className="Login">
+		<div>
 		
 			<Header />
 
-			Login<br/>Enter user name and password below
-
-			<Input  placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
-			<br/>
-			<Input placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
-			<br/>
-			<Input type="checkbox" name="persist"/> Keep me logged in?   	
-			<br/>
-
-			<Button onClick={this.handleSubmit} type="pink">Login</Button>
+			<div className="LoginForm">
+				<p>Login<br/>Enter user name and password below</p>
+				<Input className="input" placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
+				<br/>
+				<Input className="input" placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
+				<br/>
+				<Input className="input" type="checkbox" name="persist"/> Keep me logged in?   	
+				<br/>
+				<Button className="button" onClick={this.handleSubmit} type="pink">Login</Button>
+			</div>
 
 			<Footer />
 

@@ -22,7 +22,7 @@ class Header extends React.Component {
         "margin-left" : "5px",
         "margin-right" : "5px"
       },
-      "width" : "960px",
+      
       "display": "flex",
       "justify-content": "space-between"
     }

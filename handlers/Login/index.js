@@ -1,3 +1,4 @@
+require('../styles.css');
 require('./styles.css');
 	
 import React from 'react';
@@ -48,19 +49,23 @@ class Login extends React.Component {
 
   render(): ?ReactElement {
     return (
-		<div>
+		
+		<div className="Container">
 		
 			<Header />
 
-			<div className="LoginForm">
-				<p>Login<br/>Enter user name and password below</p>
-				<Input className="input" placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
-				<br/>
-				<Input className="input" placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
-				<br/>
-				<Input className="input" type="checkbox" name="persist"/> Keep me logged in?   	
-				<br/>
-				<Button className="button" onClick={this.handleSubmit} type="pink">Login</Button>
+			<div className="AppBody">
+			
+				<p className="PageTitle">Login</p>
+				<div className="LoginForm">
+					<Input className="input" placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
+					<br/>
+					<Input className="input" placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>
+					<br/>
+					<Input className="input" type="checkbox" name="persist"/> Keep me logged in?   	
+					<br/>
+					<Button className="button" onClick={this.handleSubmit} type="pink">Login</Button>
+				</div>
 			</div>
 
 			<Footer />

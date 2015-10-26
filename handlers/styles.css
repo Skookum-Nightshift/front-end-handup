@@ -1,9 +1,24 @@
-body {
-   display: flex;
-   justify-content: center;
-   background-color: #CCD1D9;
-   flex-direction: column;
-   width: 960px;
+
+.Container {
+	background-color: #F5F7Fa;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+   	background-color: #CCD1D9;
+}
+
+.AppBody {
+	flex: 1;
+	background-color: #F5F7Fa;
+	padding: 10px 20px 10px 20px;
+}
+
+.AppBody p{
+	font-size: 36px;
+}
+
+.PageTitle {
+	font-size: 36px;
 }
 
 .pageLinks > ul{

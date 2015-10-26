@@ -12,7 +12,7 @@ class Header extends React.Component {
         className = `Header is-${type}`;
 
     return (
-      <div>
+      <div className="Hero">
         <ul>
           <li>
             <img src="" alt="one"/>

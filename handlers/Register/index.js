@@ -1,5 +1,6 @@
 
 require('./styles.css');
+require('../styles.css');
 
 import React from 'react';
 import {Resolver} from 'react-resolver';
@@ -65,30 +66,75 @@ class Register extends React.Component {
 
 	render(): ?ReactElement {
 		return (
-			<div>
+			
+			<div className="Container">
 
 				<Header />
 
-			 	<div className="Register">
-				    Register<br/>
-				   
-				    <Input placeholder="First Name" type="text" name="first_name" onInputChange={this.updateState}/>
-					<br/>
-					<Input placeholder="Last Name" type="text" name="last_name" onInputChange={this.updateState}/>
-					<br/>
-					<Input placeholder="email" type="email" name="email" onInputChange={this.updateState}/>
-					<br/>
-					<br/>
-					<Input placeholder="password" type="password" name="password" onInputChange={this.updateState}/>
-					<br/>
-					<Input placeholder="confirm password" type="password" name="password_confirmation" onInputChange={this.updateState}/>
-					<br/>
+				<div className="AppBody">
 
-					<Button onClick={this.handleSubmit} type="pink">Register</Button>
-				</div>
+				 	<div className="Register">
+					   
+						<div className="Title">
+					   		<p>Register</p>
+					   	</div>
 
-				<div>
-					//Put image / story here for two side by side blocks
+					   	<div className="Personal">
+							<div className="Name">
+								<Input placeholder="First Name" type="text" name="first_name" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="Last Name" type="text" name="last_name" onInputChange={this.updateState}/>
+						   	</div>
+
+						   	<div className="Login">
+								<Input placeholder="email" type="email" name="email" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="password" type="password" name="password" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="confirm password" type="password" name="password_confirmation" onInputChange={this.updateState}/>				   	
+						   	</div>
+						</div>
+
+					   	<div className="Donation">
+					   		<div className="Amount">
+					   			<Input placeholder="Amount" type="text" name="amount" onInputChange={this.updateState}/>
+					   		</div>
+							<div className="Quantity"> 
+								<Input placeholder="Quantity" type="text" name="quantity" onInputChange={this.updateState}/>				   	
+							</div>
+					   	</div>
+
+					   	<div className="Contact">
+							<div className="Left">
+								<Input placeholder="Street Address" type="text" name="street" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="City" type="text" name="city" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="State" type="text" name="state" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="Zipcode" type="text" name="zipcode" onInputChange={this.updateState}/>
+						   	</div>
+
+						   	<div className="Right">
+								<Input placeholder="Card #" type="email" name="ccn" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="Exp" type="password" name="expDate" onInputChange={this.updateState}/>
+								<br/>
+								<Input placeholder="CCV" type="password" name="ccv" onInputChange={this.updateState}/>				   	
+						   	</div>
+						</div>
+
+					   	<div className="Submit">
+					   		<div className="Left">
+					   			Newsletter?
+					   			<Input type="checkbox" name="notification" onInputChange={this.updateState}/>				   	
+					   		</div>
+					   		<div className="Right">
+								<Button onClick={this.handleSubmit} type="pink">Register</Button>					   		
+					   		</div>
+					   	</div>
+
+					</div>
 				</div>
 
 				<Footer />

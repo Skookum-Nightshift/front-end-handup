@@ -1,4 +1,5 @@
 
+require('../styles.css');
 require('./styles.css');
 
 import React from 'react';
@@ -10,13 +11,17 @@ class WhyGiftCards extends React.Component {
 
   render(): ?ReactElement {
     return (
-    	<div>
+    	
+      <div className="Container">
 
       	<Header />
 
-      	<div className="WhyGiftCards">
-      		WhyGiftCards Body
-      	</div>
+        <div className="AppBody">
+        	<div className="WhyGiftCards">
+        		<p>WhyGiftCards Body</p>
+            
+        	</div>
+        </div>
 
 		  <Footer />
 		

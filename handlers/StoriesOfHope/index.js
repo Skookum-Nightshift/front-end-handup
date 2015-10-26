@@ -1,6 +1,6 @@
 
+require('../styles.css');
 require('./styles.css');
-
 import React from 'react';
 import {Resolver} from 'react-resolver';
 import Header from 'Header';
@@ -10,13 +10,15 @@ class StoriesOfHope extends React.Component {
 
   render(): ?ReactElement {
     return (
-      <div>
+      
+      <div className="Container">
 
       	<Header />
-
-      	<div className="StoriesOfHope">
-      		StoriesOfHope Body
-      	</div>
+        <div className="AppBody">
+        	<div className="StoriesOfHope">
+        		StoriesOfHope Body
+        	</div>
+        </div>
 
 		    <Footer />
         

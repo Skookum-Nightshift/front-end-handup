@@ -1,5 +1,10 @@
 /** @define Anchor; use strict */
 
+.Hero {
+	display: flex;
+	flex: 1;
+}
+
 .Anchor {
 }
 

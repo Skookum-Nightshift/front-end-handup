@@ -1,4 +1,5 @@
 require('./styles.css');
+require('../styles.css');
 
 import React from 'react';
 import {Resolver} from 'react-resolver';
@@ -9,14 +10,17 @@ class FAQ extends React.Component {
 
   render(): ?ReactElement {
     return (
-    	<div>
-      	<Header />
-
-      	<div className="FAQ">
-      		FAQ Body
-      	</div>
-
+    	
+      <div className="Container">
+      	
+        <Header />
+        <div className="AppBody">
+        	<div className="FAQ">
+        		FAQ Body
+        	</div>
+        </div>
 		    <Footer />
+
 		</div>
     );
   }

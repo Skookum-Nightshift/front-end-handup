@@ -1,4 +1,5 @@
 require('../styles.css');
+require('./styles.css');
 
 import React from 'react';
 import {Resolver} from 'react-resolver';
@@ -14,12 +15,13 @@ class Home extends React.Component {
   render(): ?ReactElement {
     return (
 
-      <div>
+      <div className="Container">
 
-      	<Header />
+      	<Header />/* How can I avoid using the enclosing div rather than begninning w/ Component */
 
-      	<HeroSlider />
-
+        <div className="AppBody">
+      	   <HeroSlider />
+        </div>
 		    <Footer />
 
       </div>

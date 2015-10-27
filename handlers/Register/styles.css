@@ -4,17 +4,34 @@
 .Register {
 	background-color: #F5F7Fa;
 
-	display : flex;
-	flex-direction : column;
-	align-items : center;
+	
 }
 
 .Register > div {
 	flex-direction: row;
 }
 
-.Contact {
+.Register > div {
 	flex-direction: row;
+}
+
+.Personal, .Donation, .Contact, .Submit {
+	display: flex;
+	flex-direction: row;
+	background-color: #A0D468;
+	margin-top: 20px;
+	padding: 10px 20px 10px 20px;
 	justify-content: space-between;
-	
+}
+
+.Donation {
+	background-color: #A0D468;
+}
+
+.Contact {
+	background-color: #A0D468;
+}
+
+.Submit {
+	background-color: #F5F7Fa;
 }

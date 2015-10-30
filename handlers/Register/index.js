@@ -15,40 +15,66 @@ class Register extends React.Component {
 
 	constructor(){
 		super();
-		this.state = {		
+		this.state = {
+
 			first_name: "",
 			last_name: "",
+
 			email: "",
 			password: "",
 			password_confirmation: "",
+
+			amount: "",
+			quantity: "",
+
+			streetaddress: "",
+			city: "",
+			state: "",
+			zip: "",
+
+			ccn: "",
+			expDate: "",
+			ccv: "",
+
 			err: ""
+
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.updateState = this.updateState.bind(this);
-	}
+		this.registerUser = this.registerUser.bind(this);
+		this.addPaymentMethod = this.addPaymentMethod.bind(this);
+		this.addPurchase = this.addPurchase.bind(this);
+	};
 
 	handleSubmit(){
-		console.log(
+		
+		this.registerUser();
 
-			this.state.first_name, 
-			this.state.last_name, 
-			this.state.email, 
-			this.state.password, 
-			this.state.password_confirmation, 
-			this.state.err
-		);
+		this.addPaymentMethod();
 
+		this.addPurchase();
+
+
+	};
+
+	registerUser(){
 		var reg = {
 			user : {
 				first_name : this.state.first_name,
 				last_name : this.state.last_name,
-				email : this.state.email
+				email : this.state.email,
+				streetaddress : this.state.streetaddress,
+				city : this.state.city,
+				state : this.state.state,
+				zip : this.state.zipcode
 			},
 			password : this.state.password,
 			password_confirmation : this.state.password_confirmation
-		}
+		};
+		
 		console.log(reg);
+
 		apiPost(
 			"v1/sign_up",//path
 			reg,
@@ -56,13 +82,56 @@ class Register extends React.Component {
 				console.log(reg);
 			}
 		);
-	}
+	};
+
+	addPaymentMethod(){
+		var paymentType = {
+			payment_method : {
+				"cardnumber" : this.state.ccn,
+		        "ccv" : this.state.ccv,
+		        "expdate" : this.state.expDate,
+		        "cardmembername": this.state.first_name
+			}
+		};
+		
+		console.log(paymentType);
+
+		apiPost(
+			"v1/add_card",//path
+			paymentType,
+			(paymentType) => {
+				console.log(paymentType);
+			}
+		);
+	};
+
+	addPurchase(){
+		var newPurchase = {
+			purchase : {
+				"user" : this.state.first_name,
+		        "time" : new Date(),
+		        "amount" : this.state.amount,
+		        "quantity": this.state.quantity,
+		        "deliverymethod" : "print"
+			}
+		};
+		
+		console.log(newPurchase);
+
+		apiPost(
+			"v1/add_purchase",//path
+			newPurchase,
+			(newPurchase) => {
+				console.log(newPurchase);
+			}
+		);
+	};
 
 	updateState(name, value){
 		var state = {};
 		state[name] = value;
 		this.setState(state);
-	}
+	};
 
 	render(): ?ReactElement {
 		return (
@@ -116,7 +185,7 @@ class Register extends React.Component {
 								<p>Store Delivery Address</p>
 
 								<label>STREET ADDRESS</label>
-								<Input placeholder="Street Address" type="text" name="street" onInputChange={this.updateState}/>
+								<Input placeholder="Street Address" type="text" name="streetaddress" onInputChange={this.updateState}/>
 								<br/>
 								<label>CITY</label>
 								<Input placeholder="City" type="text" name="city" onInputChange={this.updateState}/>
@@ -132,13 +201,13 @@ class Register extends React.Component {
 						   		<p>Store Payment Information</p>
 
 						   		<label>Card #</label>
-								<Input placeholder="Card #" type="email" name="ccn" onInputChange={this.updateState}/>
+								<Input placeholder="Card #" type="text" name="ccn" onInputChange={this.updateState}/>
 								<br/>
 								<label>Exp. Date</label>
-								<Input placeholder="Exp" type="password" name="expDate" onInputChange={this.updateState}/>
+								<Input placeholder="Exp" type="text" name="expDate" onInputChange={this.updateState}/>
 								<br/>
 								<label>CCV</label>
-								<Input placeholder="CCV" type="password" name="ccv" onInputChange={this.updateState}/>				   	
+								<Input placeholder="CCV" type="text" name="ccv" onInputChange={this.updateState}/>				   	
 						   		<br/>
 						   		<label>Or pay with...</label>
 						   		PayPal, Square, Wallet
@@ -151,7 +220,7 @@ class Register extends React.Component {
 					   			<Input type="checkbox" name="notification" onInputChange={this.updateState}/>				   	
 					   		</div>
 					   		<div className="Right">
-								<Button onClick={this.handleSubmit} type="pink">Register</Button>					   		
+								<Button className="button" onClick={this.handleSubmit} className="button" type="pink">Register</Button>					   		
 					   		</div>
 					   	</div>
 
@@ -162,7 +231,7 @@ class Register extends React.Component {
 			</div>
 		);
 	}
-}
+};
 Register.contextTypes = {
   router: React.PropTypes.func.isRequired
 };

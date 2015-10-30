@@ -32,6 +32,15 @@ class Login extends React.Component {
 			this.state,
 			(data) => {
 				console.log(data);
+				if (data.auth_token !== ''){
+					console.log("Token "+data.auth_token);
+					UserActions.updateUser(data);
+          			this.context.router.transitionTo('profile');
+
+				}else{
+					console.log("Login failure");
+					this.setState({ err: 'Cannot Auth' });
+				}
 			}
 		);
 	}
@@ -58,6 +67,7 @@ class Login extends React.Component {
 			
 				<p className="PageTitle">Login</p>
 				<div className="LoginForm">
+					{this.state.err.length > 0 ? this.state.err : ''}
 					<Input className="input" placeholder="email" value={this.state.email} onInputChange={this.updateState} type="email" name="email"/>
 					<br/>
 					<Input className="input" placeholder="password" value={this.state.password} onInputChange={this.updateState} type="password" name="password"/>

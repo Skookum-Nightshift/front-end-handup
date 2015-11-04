@@ -1,17 +1,14 @@
+.MainBody {
+	display: flex;
+	
+}
 
 .Container {
 	background-color: #F5F7Fa;
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-   	background-color: #CCD1D9;
+
 }
 
-.AppBody {
-	flex: 1;
-	background-color: #F5F7Fa;
-	padding: 10px 20px 10px 20px;
-}
+
 
 .AppBody p{
 	font-size: 36px;

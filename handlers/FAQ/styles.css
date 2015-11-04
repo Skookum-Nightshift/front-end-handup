@@ -4,3 +4,40 @@
 .FAQ {
 	background-color: #F5F7Fa;
 }
+
+.Questions > div > p + p{
+	display:none;
+}
+
+.Questions p { 
+	font-size: 1.0em;
+}
+.Questions div { 
+	border: 1px solid black;
+}
+
+.Summary {
+	display: flex;
+	justify-content: center;
+	background-color: #A0D468;
+}
+
+.Summary p{
+	font-size: 1.5em;
+	color: white;
+	padding: 20px 80px 20px 80px;
+}
+
+.StartButton {
+	display: flex;
+	justify-content: center; 
+	margin: 20px 0px 20px 0px;
+
+}
+
+.StartButton a{ 
+    border: 1px solid #A0D468;
+    color: #A0D468;
+    border-radius: 10px;
+    padding: 10px 40px 10px 40px;
+}

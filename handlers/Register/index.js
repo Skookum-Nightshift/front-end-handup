@@ -59,6 +59,7 @@ class Register extends React.Component {
 	};
 
 	registerUser(){
+		var status = false;
 		var reg = {
 			user : {
 				first_name : this.state.first_name,
@@ -80,6 +81,7 @@ class Register extends React.Component {
 			reg,
 			(reg) => {
 				console.log(reg);
+
 			}
 		);
 	};
@@ -220,7 +222,7 @@ class Register extends React.Component {
 					   			<Input type="checkbox" name="notification" onInputChange={this.updateState}/>				   	
 					   		</div>
 					   		<div className="Right">
-								<Button className="button" onClick={this.handleSubmit} className="button" type="pink">Register</Button>					   		
+								<Button className="button" onClick={this.handleSubmit} className="button" type="pink">Register</Button>
 					   		</div>
 					   	</div>
 

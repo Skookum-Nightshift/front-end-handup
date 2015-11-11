@@ -39,7 +39,7 @@ class Login extends React.Component {
 		console.log("State: "+this.state.user);
 		if (this.state.user) {
 			console.log("redirect");
-			//this.context.router.transitionTo('profile');
+			this.context.router.transitionTo('profile');
 		}
 
 		UserStore.listen((state) => {

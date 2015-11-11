@@ -12,7 +12,7 @@ class Header extends LoggedInHandler {
   constructor() {
     super();
 
-    this.state.transitionTo = 'none';
+    this.state.redirectTo = 'none';
 
     this.handleLogout = this.handleLogout.bind(this);
   }
@@ -66,9 +66,9 @@ class Header extends LoggedInHandler {
 
       <div className="Header">
 
-
+          
+          
           <div id="topNav" style={css.topNav}>
-            <i className="fa fa-bars" style={css.ham}></i>
             <div style={css.topNav.pageLinks}>  
               <a style={css.topNav.link} href="/about">About</a>
               <a style={css.topNav.link} href="/stories">Stories of Hope</a>

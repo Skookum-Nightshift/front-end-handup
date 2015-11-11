@@ -8,25 +8,31 @@ import Footer from 'Footer';
 import Input from 'Input';
 import Button from 'Button';
 import {apiPost} from 'requestLib';
+import {apiGet} from 'requestLib';
 import LoggedInHandler from 'LoggedInHandler';
 
 class Profile extends LoggedInHandler  {
-
 
   constructor(){
     super();
     
     this.state.editMode = false;
+    this.state.paymentEdit = false;
+    this.state.cards = [];
+    this.state.payment = {};
 
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateUserState = this.updateUserState.bind(this);
     this.updateUserInfo = this.updateUserInfo.bind(this);
+    this.getPaymentMethods = this.getPaymentMethods.bind(this);
+    this.getPaymentMethods = this.getPaymentMethods.bind(this);
+    this.savePaymentMethod = this.savePaymentMethod.bind(this);
+    this.updatePaymentMethodState = this.updatePaymentMethodState.bind(this);
+    this.removeCard = this.removeCard.bind(this);
   }
 
   componentDidMount() {
-
-    console.log("CDM: "+this.state.user);
-
+    this.getPaymentMethods();
   }
   
   handleUpdate(){
@@ -46,10 +52,13 @@ class Profile extends LoggedInHandler  {
     this.setState({ user });
   };
 
+  updatePaymentMethodState(name, value){
+    var {payment} = this.state;
+    payment[name] = value;
+    this.setState({ payment });
+  };
 
   updateUserInfo(){
-    console.log(this.state.user);
-
     var userInfo = {
       user : {
         first_name : this.state.user.first_name,
@@ -62,45 +71,101 @@ class Profile extends LoggedInHandler  {
       }
     };
 
-    console.log(userInfo);
     apiPost(
       "v1/users",//path
       userInfo,
       (data) => {
         console.log(data);
         this.updateUser(userInfo.user);
-        //this.setState({editMode: false});
-        this.context.router.transitionTo('profile');
+        this.setState({editMode: false});
       },
       (data) => {
         console.log(data);
       },
-      {
-        'Authorization': `Bearer ${this.state.user.auth_token}`
-      }
+      {'Authorization': `Bearer ${this.state.user.auth_token}`}
     );
-
-    //this.updateUser(state.user);
   };
 
+  getPaymentMethods(){
+    apiGet(
+      "v1/get_pay_methods",
+      { },
+      (data) => {
+        console.log(data);
+        this.setState({ cards: data.payment });
+      },
+      (data) => {
+        console.log(data);
+      }
+    );
+  };
+
+  savePaymentMethod(){
+    var paymentType = {
+      payment_method : {
+        "cardnumber" : this.state.payment.cardnumber,
+        "ccv" : this.state.payment.ccv,
+        "expdate" : this.state.payment.expdate,
+        "cardmembername": this.state.payment.cardmembername
+      }
+    };
+    
+    apiPost(
+      "v1/add_card",//path
+      paymentType,
+      (paymentType) => {
+        console.log(paymentType);
+        var cards = this.state.cards;
+        cards.push(paymentType);
+        this.setState({cards});
+      },
+      (error) => {
+        console.log(error);
+      },
+      {'Authorization': `Bearer ${this.state.user.auth_token}`}
+    );
+    
+  };
+
+  removeCard(card){
+    console.log(card);
+    
+    var deleteCard = confirm("Are you sure?");
+    if(deleteCard){
+      var paymentType = { payment_method : card };
+      apiPost(
+        "v1/remove_card",//path
+        paymentType,
+        (paymentType) => {
+          console.log(paymentType);
+          
+          var cards = this.state.cards;
+          cards.splice( cards.indexOf(card), 1 );
+          this.setState({cards});
+        },
+        (error) => {
+          console.log(error);
+        },
+        {'Authorization': `Bearer ${this.state.user.auth_token}`}
+      );
+    }
+  };
 
   render(): ?ReactElement {
 
     if ( typeof window === 'undefined' ) { return <div></div>; }
 
-    console.log(JSON.stringify(this.state.user));
+    //console.log(JSON.stringify(this.state.user));
 
     var user = this.state.user || {};
 
+    var  {cards} = this.state;
     var {first_name, last_name, email, streetaddress, city, state, zip} = this.state.user;
 
-    console.log("Render: "+this.state.user);
+    //console.log("Render: "+this.state.user);
 
     return (
-      
       <div className="Container">
-        
-        
         <div className="AppBody">
           <p className="PageTitle">My CHANGE Account</p>
         	
@@ -108,20 +173,21 @@ class Profile extends LoggedInHandler  {
         		<h3>Profile</h3>
               <div className="Personal">
                 <div className="Name">
-                  <label>FIRST NAME</label>
+                  <label>FIRST NAME</label>&nbsp;
                   { !this.state.editMode ? first_name : <Input defaultValue={first_name} type="text" name="first_name" onInputChange={this.updateUserState} />}
                   <br/>
-                  <label>LAST NAME</label>
+                  <label>LAST NAME</label>&nbsp;
+                   { !this.state.editMode ? last_name : <Input defaultValue={last_name} type="text" name="last_name" onInputChange={this.updateUserState} />}
                 </div>
-                  { !this.state.editMode ? last_name : <Input defaultValue={last_name} type="text" name="last_name" onInputChange={this.updateUserState} />}
+                 
                 <div className="Login">
-                  <label>EMAIL</label>
+                  <label>EMAIL</label>&nbsp;
                   { !this.state.editMode ? email : <Input defaultValue={email} type="text" name="email" onInputChange={this.updateUserState}/>}
                   <br/>
-                  <label>PASSWORD</label>
+                  <label>PASSWORD</label>&nbsp;
                   { !this.state.editMode ? '********' : <Input type="password" name="password" onInputChange={this.updateUserState}/>}
                   <br/>
-                  <label>CONFIRM PASSWORD</label>
+                  <label>CONFIRM PASSWORD</label>&nbsp;
                   { !this.state.editMode ? '********' : <Input type="password" name="password_confirmation" onInputChange={this.updateUserState}/>}
                   { this.state.editMode ? <Button onClick={this.updateUserInfo} className="button">Save</Button> : <Button onClick={this.handleUpdate} className="button">Update User</Button>}
                 </div>
@@ -131,9 +197,25 @@ class Profile extends LoggedInHandler  {
               <div>
                 <div>
                   <h3>Payment Preferences</h3>
-                  <div>Mastercard xxxx-3234 exp. date 12/31/15</div>
-                  <div>Mastercard xxxx-3234 exp. date 12/31/15</div>
-                  <div>Mastercard xxxx-3234 exp. date 12/31/15</div>
+                  <div>
+                     New Card:&nbsp;
+                    <Input onInputChange={this.updatePaymentMethodState} placeholder="Card Member Name" name="cardmembername" type="text" />
+                    <Input onInputChange={this.updatePaymentMethodState} placeholder="CC Number" name="cardnumber" type="text" />
+                    <Input onInputChange={this.updatePaymentMethodState} placeholder="Exp Date" name="expdate" type="text" />
+                    <Input onInputChange={this.updatePaymentMethodState} placeholder="CCV" name="ccv" type="text" />
+                    <Button onClick={this.savePaymentMethod} className="button">Add Payment Method</Button>
+                  </div>
+
+                  { cards.map( (card) => 
+                    <div>
+                      {card.cardmembername}&nbsp;
+                      {card.cardnumber}&nbsp;
+                      {card.expdate}&nbsp;
+                      {card.ccv}&nbsp;
+                      <a onClick={this.removeCard.bind(this, card)} >Remove</a>
+                    </div> ) 
+                  }
+                   
                 </div>
 
                 <div>
@@ -158,7 +240,7 @@ class Profile extends LoggedInHandler  {
                 { !this.state.editMode ? zip : <Input defaultValue={zip} placeholder="Zipcode" type="text" name="zipcode" onInputChange={this.updateState}/>}
               </div>
             </div>
-            <Button className="button" onClick={this.handleUpdate} type="pink">Update</Button>
+            <Button className="button" onClick={this.getPaymentMethods} type="pink">Update</Button>
           </div>
         </div>
 

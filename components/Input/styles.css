@@ -1,7 +1,8 @@
 /** @define Input; use strict */
 
 .Input {
-  width: 100%;
+  margin: 0px 5px 0px 5px;
+  /*width: 100%;*/
   font-size: 13px;
   color: #494949;
   height: 34px;

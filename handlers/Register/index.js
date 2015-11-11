@@ -8,6 +8,7 @@ import Button from 'Button';
 import Input from 'Input';
 import {apiPost} from 'requestLib';
 import UserActions from '../../actions/UserActions';
+import UserStore from '../../stores/UserStore';
 import Header from 'Header';
 import Footer from 'Footer';
 
@@ -15,6 +16,7 @@ class Register extends React.Component {
 
 	constructor(){
 		super();
+		
 		this.state = {
 
 			first_name: "",
@@ -46,6 +48,11 @@ class Register extends React.Component {
 		this.addPaymentMethod = this.addPaymentMethod.bind(this);
 		this.addPurchase = this.addPurchase.bind(this);
 	};
+
+	componentDidMount(){
+
+		
+	}
 
 	handleSubmit(){
 		
@@ -139,11 +146,7 @@ class Register extends React.Component {
 		return (
 			
 			<div className="Container">
-
-				<Header />
-
 				<div className="AppBody">
-
 				 	<div className="Register">
 					   
 						<div className="Title">

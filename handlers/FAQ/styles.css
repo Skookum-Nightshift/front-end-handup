@@ -5,15 +5,36 @@
 	background-color: #F5F7Fa;
 }
 
-.Questions > div > p + p{
+.Questions-Question {
+	margin: 12px 0px 12px 0px;
+}
+
+.Questions-Answer {
+	display: none;
+}
+
+.Questions-Question.isActive + .Questions-Answer {
+	display: block;
+}
+
+.FAQ > .QNA {
+	padding: 20px 60px 20px 60px;
+}
+
+.FAQ > .QNA > .Questions {
+	padding: 0px 25px 0px 20px;
+	border: 1px solid black;
+}
+
+.QNA > div > p + p{
 	display:none;
 }
 
-.Questions p { 
+.QNA p { 
 	font-size: 1.0em;
 }
-.Questions div { 
-	border: 1px solid black;
+.QNA div { 
+	
 }
 
 .Summary {

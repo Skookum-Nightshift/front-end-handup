@@ -166,9 +166,11 @@ class Profile extends LoggedInHandler  {
 
     return (
       <div className="Container">
+        <div>
+          <p className="Container-PageTitle">My CHANGE Account</p>
+        </div>
+
         <div className="AppBody">
-          <p className="PageTitle">My CHANGE Account</p>
-        	
           <div className="Profile">
         		<h3>Profile</h3>
               <div className="Personal">

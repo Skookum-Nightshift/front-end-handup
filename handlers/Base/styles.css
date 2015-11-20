@@ -2,8 +2,8 @@
 @import 'normalize.css';
 
 .AppBase {
-	min-height: 100vh;
 	display: flex;
+	min-height: 100vh;
   	flex-direction: column;
   	justify-content: center;
    	align-content: center;

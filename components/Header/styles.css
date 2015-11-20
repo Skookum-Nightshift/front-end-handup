@@ -1,49 +1,43 @@
-/** @define Anchor; use strict */
-
 .Header{
-	background-color: #FC6E51;
-	/*
-	max-height: 100%;
-	width: 100% !important;
-	*/
+	background: url('/public/images/banner_span.png') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	flex: 1;
 }
 
-.Header a{
-	color: #F5F7Fa;
+.Header-Auth{
+	background: #434343;
+	height: 122px;
+	flex: 1;
 }
 
-.appLogo img{
-	height : 10px;
-	width: 10px;
+.Header-TopNav {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;/* I should probably be using @media here to make staking look a lot better */
+	margin: 38px 100px 0px 100px;
+}
+
+.Header-TopNav-Login{
+	margin-left: 29px;
+	color: #FFFFFF;
+}
+
+.Header-TopNav-Register {
+	/* Rectangle 1: */
+	background: #FFFFFF;
+	border-radius: 40px;
+	/* Create Account: */
+	font-family: OpenSans-Semibold;
+	font-size: 16px;
+	color: #4A4A4A;
+	line-height: 22px;
+	/* Rectangle 1 + Create Account Copy: */
+	padding: 18px 27px 17px 37px;
 }
 
 .Main {
-	border: 5px solid black;
-}
-
-.Anchor {
-}
-.Anchor.is-black {
-}
-
-.Anchor.is-pink {
-}
-
-.Anchor.is-grey {
-}
-
-.Anchor.is-white {
-}
-
-
-.Anchor.is-black:hover {
-}
-
-.Anchor.is-pink:hover {
-}
-
-.Anchor.is-grey:hover {
-}
-
-.Anchor.is-white:hover {
+	/*border: 5px solid black;*/
 }

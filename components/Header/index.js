@@ -27,67 +27,44 @@ class Header extends LoggedInHandler {
     var {children, type, ...props} = this.props,
           className = `Header is-${type}`;
 
-    var css = {
-      ham: {
-        "font-size": "4em"
-      },
-      logo: {
-        height : "100px",
-        width : "100px"
-      },
-      topNav : {
-        link : {
-          "margin-left" : "5px",
-          "margin-right" : "5px"
-        },
-        
-        "display": "flex",
-        "justify-content": "space-between"
-      }
-    };
-
-    let userNav = (
-      <div style={css.topNav.accountLinks}>
-        <a style={css.topNav.link} href="register">Create Account</a> | <a style={css.topNav.link} href="login">Login</a>
-      </div>
+    let unAuthNav = (
+        <div className="Header-TopNav">
+          <div className="Header-TopNav-Logo">
+            <a href="#">
+              <img src="./public/images/logo.png" alt="Logo"/>
+            </a>
+          </div>
+          <div className="Header-TopNav-AuthNav">
+            <a className="Header-TopNav-Register" href="register">Create Account</a><a className="Header-TopNav-Login" href="login">Login</a>
+          </div>   
+        </div>
     );
 
     let authNav = "";
+
     if(this.state.user){
       let {user} = this.state;
       authNav = (
-        <div style={css.topNav.accountLinks}>
-          <p>Welcome {user.first_name} | <a href="" onClick={this.handleLogout} >Logout</a></p>
-        </div>
+        
+          <div className="Header-TopNav">
+            <div className="Header-TopNav-Logo">
+              <a href="#">
+                <img src="./public/images/logo.png" alt="Logo"/>
+              </a>
+            </div>
+            <div>
+              <p>Welcome {user.first_name} | <a href="" onClick={this.handleLogout} >Logout</a></p>
+            </div>     
+          </div>
       );
     }
 
+    var authClass = this.state.user ? "-Auth" : "";
+
     return (
-
-      <div className="Header">
-
-          
-          
-          <div id="topNav" style={css.topNav}>
-            <div style={css.topNav.pageLinks}>  
-              <a style={css.topNav.link} href="/about">About</a>
-              <a style={css.topNav.link} href="/stories">Stories of Hope</a>
-              <a style={css.topNav.link} href="/faq">FAQ</a>
-              <a style={css.topNav.link} href="/whygiftcards">Why Gift Cards?</a>
-            </div>
-
-            <div style={css.topNav.appLogo}>
-              <a href="#">
-                <img style={css.logo} src="./public/images/logo.png" alt="Logo"/>
-              </a>
-            </div>
-            
-            
-              { this.state.user ? authNav : userNav }      
-            
-            
-        </div>
-      </div>  
+      <div className={"Header"+authClass}>
+          { this.state.user ? authNav : unAuthNav }      
+      </div>
     );
   }
 }

@@ -17,12 +17,9 @@ class Home extends React.Component {
 
       <div className="Container">
 
-      	<Header />/* How can I avoid using the enclosing div rather than begninning w/ Component */
-
         <div className="AppBody">
       	   <HeroSlider />
         </div>
-		    <Footer />
 
       </div>
 

@@ -43,7 +43,8 @@ class Register extends React.Component {
       expDate: '',
       ccv: '',
 
-      err: ''
+      err: '',
+      auth_token: ''
 
     };
 
@@ -86,11 +87,19 @@ class Register extends React.Component {
         UserActions.updateUser(reg);
         this.addPaymentMethod(reg);
         console.log(reg);
+        console.log(reg.auth_token);
+        //this.setState({ auth_token: "YAAY" });
+        console.log(reg);
       }
     );
   };
 
+
+
   addPaymentMethod(reg){
+
+    console.log("Auth: "+reg.auth_token);
+
     var paymentType = {
       payment_method : {
         "user_id": reg.user_id,
@@ -102,21 +111,25 @@ class Register extends React.Component {
     };
 
     console.log(paymentType);
-
+    console.log(this.state);
     apiPost(
       "v1/add_card",//path
       paymentType,
       (paymentType) => {
         this.addPurchase(reg);
         console.log(paymentType);
-      }
+      },
+      (error) => {
+        console.log(error);
+      },
+        {'Authorization': `Bearer ${reg.auth_token}`}
     );
   };
 
   addPurchase(reg){
     var newPurchase = {
       purchase : {
-        "user_id": reg.user_id,
+        "user": reg.user_id,
         "time" : new Date(),
         "amount" : this.state.amount,
         "quantity": this.state.quantity,
@@ -131,7 +144,11 @@ class Register extends React.Component {
       newPurchase,
       (newPurchase) => {
         console.log(newPurchase);
-      }
+      },
+      (error) => {
+        console.log(error);
+      },
+        {'Authorization': `Bearer ${reg.auth_token}`}
     );
   };
 

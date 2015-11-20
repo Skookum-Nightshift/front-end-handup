@@ -57,9 +57,7 @@ class Register extends React.Component {
   };
 
   handleSubmit(){
-
     this.registerUser();
-
   };
 
   registerUser(cb){
@@ -78,18 +76,15 @@ class Register extends React.Component {
       password_confirmation : this.state.password_confirmation
     };
 
-    console.log(reg);
-
     apiPost(
       'v1/sign_up', //path
       reg,
       (reg) => {
         UserActions.updateUser(reg);
         this.addPaymentMethod(reg);
-        console.log(reg);
-        console.log(reg.auth_token);
-        //this.setState({ auth_token: "YAAY" });
-        console.log(reg);
+      },
+      (error) => {
+        console.log(error);
       }
     );
   };
@@ -97,9 +92,6 @@ class Register extends React.Component {
 
 
   addPaymentMethod(reg){
-
-    console.log("Auth: "+reg.auth_token);
-
     var paymentType = {
       payment_method : {
         "user_id": reg.user_id,
@@ -110,8 +102,6 @@ class Register extends React.Component {
       }
     };
 
-    console.log(paymentType);
-    console.log(this.state);
     apiPost(
       "v1/add_card",//path
       paymentType,
@@ -136,8 +126,6 @@ class Register extends React.Component {
         "deliverymethod" : "print"
       }
     };
-
-    console.log(newPurchase);
 
     apiPost(
       "v1/add_purchase",//path

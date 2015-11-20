@@ -5,37 +5,52 @@ require('./styles.css');
 import React from 'react';
 var {PropTypes} = React;
 
-class Header extends React.Component {
+class HeroSlider extends React.Component {
+
+  renderContents(items) {
+    return items.map(item => (
+      <div className="HeroSliderItem">
+        <div className="HeroSliderItem-ImageWrapper">
+          <img src={`/public/images/${item.image}`} className="HeroSliderItem-Image"></img>
+        </div>
+        <div className="HeroSliderItem-Title">{item.title}</div>
+        <div className="HeroSliderItem-Content">{item.content}</div>
+      </div>
+    ));
+  }
+
   render(): ?ReactElement {
 
-    var {children, type, ...props} = this.props,
-        className = `Header is-${type}`;
+    let items = [
+      {
+        image: 'Card.png',
+        title: 'We send you cards',
+        content: 'You receive gift cards in the mail along with instructions for handing out.'
+      },
+      {
+        image: 'GiveIcon.png',
+        title: 'You give cards',
+        content: 'You distribute gift cards to people in need instead of cash.'
+      },
+      {
+        image: 'ForkKnife.png',
+        title: 'Cards are redeemed',
+        content: '100% of your card is used to buy food and neccessities. We notify you when the card is used.'
+      }
+    ];
 
     return (
-      <div className="Hero">
-        <ul>
-          <li>
-            <img src="" alt="one"/>
-          </li>
-          <li>
-            <img src="" alt="two"/>
-          </li>
-          <li>
-            <img src="" alt="three"/>
-          </li>
-        </ul>
+      <div className="HeroSlider">
+        {this.renderContents(items)}
       </div>
     );
   }
 }
 
-Header.propTypes = {
-  type: PropTypes.oneOf(['black', 'grey', 'pink', 'white']),
-  children: PropTypes.any.isRequired,
+HeroSlider.propTypes = {
 };
 
-Header.defaultProps = {
-  type: 'black',
+HeroSlider.defaultProps = {
 };
 
-export default Header;
+export default HeroSlider;

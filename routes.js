@@ -22,17 +22,16 @@ import About from'./handlers/About';
 var routes = (
   <Route path="/" handler={App} >
     <DefaultRoute name="home" handler={Home} />
-    <Route name="profile" path="profile" handler={Profile} />
-  	<Route name="login" path="login" handler={Login} />
-  	<Route name="register" path="register" handler={Register} />
+    <Route name="profile" handler={Profile} />
+  	<Route name="login" handler={Login} />
+  	<Route name="register" handler={Register} />
     <Route name="StoriesOfHope" path="stories" handler={StoriesOfHope} />
-    <Route name="faq" path="faq" handler={FAQ} />
+    <Route name="faq" handler={FAQ} />
     <Route name="WhyGiftCards" path="whygiftcards" handler={WhyGiftCards} />
     <Route name="About" path="about" handler={About} />
   	<NotFoundRoute handler={NotFound} />
-    <Route name="assets" path="/assets"/>
   </Route>
-  
+
 );
 
 export default routes;

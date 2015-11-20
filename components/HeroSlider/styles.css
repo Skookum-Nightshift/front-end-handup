@@ -1,34 +1,39 @@
 /** @define Anchor; use strict */
 
-.Hero {
+.HeroSlider {
 	display: flex;
+	flex: 1;
+	padding: 53px 0;
+}
+
+.HeroSlider .HeroSliderItem {
 	flex: 1;
 }
 
-.Anchor {
+.HeroSliderItem .HeroSliderItem-ImageWrapper {
+	display: table;
+	height: 90px;
+	margin: 0 auto;
+	margin-bottom: 33px;
 }
 
-.Anchor.is-black {
+.HeroSliderItem .HeroSliderItem-Image {
+	text-align: center;
 }
 
-.Anchor.is-pink {
+.HeroSliderItem .HeroSliderItem-Title {
+	margin: 0 auto;
+	line-height: 38px;
+	font-size: 28px;
+	text-align: center;
+	max-width: 282px;
 }
 
-.Anchor.is-grey {
-}
-
-.Anchor.is-white {
-}
-
-
-.Anchor.is-black:hover {
-}
-
-.Anchor.is-pink:hover {
-}
-
-.Anchor.is-grey:hover {
-}
-
-.Anchor.is-white:hover {
+.HeroSliderItem .HeroSliderItem-Content {
+	margin: 0 auto;
+	line-height: 16px;
+	font-size: 14px;
+	text-align: center;
+	margin-top: 5px;
+	max-width: 220px;
 }

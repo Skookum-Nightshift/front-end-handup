@@ -1,0 +1,32 @@
+/** @define BaseFrom; use strict */
+
+.BaseForm-Body {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 30px 22px;
+  background-color: #4A4A4A;
+  color: #fff;
+}
+
+.BaseForm-Submit {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  color: #FFF;
+  font-weight: 500;
+  text-align: center;
+  height: 73px;
+  background-color: #ED5565;
+  font-size: 24px;
+  line-height: 73px;
+  cursor: pointer;
+}
+
+.BaseForm-Submit:hover {
+  background-color: rgba(237, 85, 101, 0.75);
+}
+
+.BaseForm-Submit.is_disabled,
+.BaseForm-Submit.is_disabled:hover {
+  cursor: default;
+  background-color: #4A4A4A;
+}

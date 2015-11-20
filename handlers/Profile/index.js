@@ -3,25 +3,25 @@ require('./styles.css');
 
 import React from 'react';
 import {Resolver} from 'react-resolver';
-import Header from 'Header';
-import Footer from 'Footer';
 import Input from 'Input';
 import Button from 'Button';
 import {apiPost} from 'requestLib';
 import {apiGet} from 'requestLib';
 import LoggedInHandler from 'LoggedInHandler';
+import TitlePageBase from 'TitlePageBase';
+import BaseForm from 'BaseForm';
 
-class Profile extends LoggedInHandler  {
+class Profile extends LoggedInHandler {
 
-  constructor(){
+  constructor() {
     super();
-    
-    this.state.editMode = false;
+
+    this.state.userEdited = false;
     this.state.paymentEdit = false;
+    this.state.newCardForm = false;
     this.state.cards = [];
     this.state.payment = {};
 
-    this.handleUpdate = this.handleUpdate.bind(this);
     this.updateUserState = this.updateUserState.bind(this);
     this.updateUserInfo = this.updateUserInfo.bind(this);
     this.getPaymentMethods = this.getPaymentMethods.bind(this);
@@ -32,33 +32,24 @@ class Profile extends LoggedInHandler  {
   }
 
   componentDidMount() {
+    this.watchUser();
+    this.handleNoUser();
     this.getPaymentMethods();
   }
-  
-  handleUpdate(){
-    var {editMode} = this.state;
-    if (editMode) {
-      // SUBMIT
-      this.setState({ editMode: false });
-    } else {
-      this.setState({ editMode: true });
-    }
 
-  };
-  
-  updateUserState(name, value){
+  updateUserState(name, value) {
     var {user} = this.state;
     user[name] = value;
-    this.setState({ user });
-  };
+    this.setState({ user, userEdited: true });
+  }
 
-  updatePaymentMethodState(name, value){
+  updatePaymentMethodState(name, value) {
     var {payment} = this.state;
     payment[name] = value;
-    this.setState({ payment });
-  };
+    this.setState({ payment, paymentEdit: true });
+  }
 
-  updateUserInfo(){
+  updateUserInfo() {
     var userInfo = {
       user : {
         first_name : this.state.user.first_name,
@@ -77,16 +68,16 @@ class Profile extends LoggedInHandler  {
       (data) => {
         console.log(data);
         this.updateUser(userInfo.user);
-        this.setState({editMode: false});
+        this.setState({userEdited: false});
       },
       (data) => {
         console.log(data);
       },
       {'Authorization': `Bearer ${this.state.user.auth_token}`}
     );
-  };
+  }
 
-  getPaymentMethods(){
+  getPaymentMethods() {
     apiGet(
       "v1/get_pay_methods",
       { },
@@ -98,9 +89,9 @@ class Profile extends LoggedInHandler  {
         console.log(data);
       }
     );
-  };
+  }
 
-  savePaymentMethod(){
+  savePaymentMethod() {
     var paymentType = {
       payment_method : {
         "cardnumber" : this.state.payment.cardnumber,
@@ -109,7 +100,7 @@ class Profile extends LoggedInHandler  {
         "cardmembername": this.state.payment.cardmembername
       }
     };
-    
+
     apiPost(
       "v1/add_card",//path
       paymentType,
@@ -117,19 +108,18 @@ class Profile extends LoggedInHandler  {
         console.log(paymentType);
         var cards = this.state.cards;
         cards.push(paymentType);
-        this.setState({cards});
+        this.setState({cards, paymentEdit: false, newCardForm: false});
       },
       (error) => {
         console.log(error);
       },
       {'Authorization': `Bearer ${this.state.user.auth_token}`}
     );
-    
-  };
 
-  removeCard(card){
-    console.log(card);
-    
+  }
+
+  removeCard(card) {
+
     var deleteCard = confirm("Are you sure?");
     if(deleteCard){
       var paymentType = { payment_method : card };
@@ -138,7 +128,7 @@ class Profile extends LoggedInHandler  {
         paymentType,
         (paymentType) => {
           console.log(paymentType);
-          
+
           var cards = this.state.cards;
           cards.splice( cards.indexOf(card), 1 );
           this.setState({cards});
@@ -149,104 +139,80 @@ class Profile extends LoggedInHandler  {
         {'Authorization': `Bearer ${this.state.user.auth_token}`}
       );
     }
-  };
+  }
+
+  handleSubmit() {
+    let {userEdited, paymentEdit} = this.state;
+    if (userEdited) {
+      this.updateUserInfo();
+    }
+    if (paymentEdit) {
+      this.savePaymentMethod();
+    }
+  }
+
+  openNewCardForm() {
+    this.setState({newCardForm: true});
+  }
 
   render(): ?ReactElement {
 
-    if ( typeof window === 'undefined' ) { return <div></div>; }
-
-    //console.log(JSON.stringify(this.state.user));
+    if ( typeof window === 'undefined' || !this.state.user ) { return <div></div>; }
 
     var user = this.state.user || {};
 
-    var  {cards} = this.state;
+    var {cards, userEdited, paymentEdit} = this.state;
     var {first_name, last_name, email, streetaddress, city, state, zip} = this.state.user;
-
-    //console.log("Render: "+this.state.user);
-
+    var text = userEdited || paymentEdit ? 'Update' : '';
     return (
-      <div className="Container">
-        <div>
-          <p className="Container-PageTitle">My CHANGE Account</p>
-        </div>
+      <TitlePageBase title="My CHANGE Account">
+        <BaseForm submitText={text} onSubmit={this.handleSubmit.bind(this)} disabled={!userEdited && !paymentEdit}>
+          <Input defaultValue={first_name} type="text" name="first_name" onInputChange={this.updateUserState} className="Input50 InputFirstLine" />
+          <Input defaultValue={last_name} type="text" name="last_name" onInputChange={this.updateUserState} className="Input50Push InputFirstLine" />
 
-        <div className="AppBody">
-          <div className="Profile">
-        		<h3>Profile</h3>
-              <div className="Personal">
-                <div className="Name">
-                  <label>FIRST NAME</label>&nbsp;
-                  { !this.state.editMode ? first_name : <Input defaultValue={first_name} type="text" name="first_name" onInputChange={this.updateUserState} />}
-                  <br/>
-                  <label>LAST NAME</label>&nbsp;
-                   { !this.state.editMode ? last_name : <Input defaultValue={last_name} type="text" name="last_name" onInputChange={this.updateUserState} />}
-                </div>
-                 
-                <div className="Login">
-                  <label>EMAIL</label>&nbsp;
-                  { !this.state.editMode ? email : <Input defaultValue={email} type="text" name="email" onInputChange={this.updateUserState}/>}
-                  <br/>
-                  <label>PASSWORD</label>&nbsp;
-                  { !this.state.editMode ? '********' : <Input type="password" name="password" onInputChange={this.updateUserState}/>}
-                  <br/>
-                  <label>CONFIRM PASSWORD</label>&nbsp;
-                  { !this.state.editMode ? '********' : <Input type="password" name="password_confirmation" onInputChange={this.updateUserState}/>}
-                  { this.state.editMode ? <Button onClick={this.updateUserInfo} className="button">Save</Button> : <Button onClick={this.handleUpdate} className="button">Update User</Button>}
-                </div>
-                
-            </div>
-            <div className="Contact">
-              <div>
-                <div>
-                  <h3>Payment Preferences</h3>
-                  <div>
-                     New Card:&nbsp;
-                    <Input onInputChange={this.updatePaymentMethodState} placeholder="Card Member Name" name="cardmembername" type="text" />
-                    <Input onInputChange={this.updatePaymentMethodState} placeholder="CC Number" name="cardnumber" type="text" />
-                    <Input onInputChange={this.updatePaymentMethodState} placeholder="Exp Date" name="expdate" type="text" />
-                    <Input onInputChange={this.updatePaymentMethodState} placeholder="CCV" name="ccv" type="text" />
-                    <Button onClick={this.savePaymentMethod} className="button">Add Payment Method</Button>
-                  </div>
+          <Input defaultValue={email} type="text" name="email" onInputChange={this.updateUserState} />
 
-                  { cards.map( (card) => 
-                    <div>
-                      {card.cardmembername}&nbsp;
-                      {card.cardnumber}&nbsp;
-                      {card.expdate}&nbsp;
-                      {card.ccv}&nbsp;
-                      <a onClick={this.removeCard.bind(this, card)} >Remove</a>
-                    </div> ) 
-                  }
-                   
-                </div>
-
-                <div>
-                  <h3>Notification Preferences</h3>
-                  <div>Send me updates and news <Input type="checkbox"/></div>
-                  <div>Notify me when card is used <Input type="checkbox"/></div>
-                </div>
-             </div>
-
-              <div>
-                <h3>Delivery Address</h3>
-                <label>STREET ADDRESS</label>
-                { !this.state.editMode ? streetaddress : <Input defaultValue={streetaddress} placeholder="Street Address" type="text" name="streetaddress" onInputChange={this.updateState}/>}
-                <br/>
-                <label>CITY</label>
-                { !this.state.editMode ? city : <Input defaultValue={city} placeholder="City" type="text" name="city" onInputChange={this.updateState}/>}
-                <br/>
-                <label>STATE</label>
-                { !this.state.editMode ? state : <Input defaultValue={state} placeholder="State" type="text" name="state" onInputChange={this.updateState}/>}
-                <br/>
-                <label>ZIP</label>
-                { !this.state.editMode ? zip : <Input defaultValue={zip} placeholder="Zipcode" type="text" name="zipcode" onInputChange={this.updateState}/>}
-              </div>
-            </div>
-            <Button className="button" onClick={this.getPaymentMethods} type="pink">Update</Button>
+          <div>
+            <h3>Delivery Address</h3>
+            <Input defaultValue={streetaddress} placeholder="Street Address" type="text" name="streetaddress" onInputChange={this.updateUserState} className="Input50"/>
+            <Input defaultValue={city} placeholder="City" type="text" name="city" onInputChange={this.updateUserState} className="Input50Push" />
+            <Input defaultValue={state} placeholder="State" type="text" name="state" onInputChange={this.updateUserState} className="Input50"/>
+            <Input defaultValue={zip} placeholder="Zipcode" type="text" name="zipcode" onInputChange={this.updateUserState} className="Input50Push"/>
           </div>
-        </div>
 
-      </div>
+          <div>
+            <h3>Notification Preferences</h3>
+            <div>Send me updates and news  from CHANGEapp.io and get notified when we  release new features <Input type="checkbox" style={{marginLeft: 15}} name="value" onInputChange={this.updateState}/></div>
+            <div>Notify me when cards are used <Input type="checkbox" style={{marginLeft: 15}} name="value" onInputChange={this.updateState}/></div>
+          </div>
+
+          <div>
+            <h3>Payment Preferences</h3>
+            {this.state.newCardForm ? (
+              <div>
+                New Card
+                <Input onInputChange={this.updatePaymentMethodState} placeholder="Card Member Name" name="cardmembername" type="text" />
+                <Input onInputChange={this.updatePaymentMethodState} placeholder="CC Number" name="cardnumber" type="text" />
+                <Input onInputChange={this.updatePaymentMethodState} placeholder="Exp Date" name="expdate" type="text" />
+                <Input onInputChange={this.updatePaymentMethodState} placeholder="CCV" name="ccv" type="text" />
+              </div>
+            ) : (<Button onClick={this.openNewCardForm.bind(this)} >+ Card</Button>)}
+
+
+            {
+              cards.map( (card)=>(
+                <div>
+                  {card.cardmembername}&nbsp;
+                  {card.cardnumber}&nbsp;
+                  {card.expdate}&nbsp;
+                  {card.ccv}&nbsp;
+                  <a onClick={this.removeCard.bind(this, card)} >Remove</a>
+                </div>
+              ))
+            }
+          </div>
+        </BaseForm>
+      </TitlePageBase>
     );
   }
 }

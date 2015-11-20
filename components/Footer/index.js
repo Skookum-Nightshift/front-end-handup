@@ -13,12 +13,7 @@ class Footer extends React.Component {
 
     return (
       <div className="Footer">
-        <div className="TOS">
-          <a>Terms of Service</a> | <a>Privacy Policy</a>
-        </div>
-        <div className="COPYRIGHT">
-          <p>Copyright 2015, CHANGE App, All Rights Reserved</p>
-        </div>
+        
       </div>
     );
   }

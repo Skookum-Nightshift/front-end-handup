@@ -1,26 +1,7 @@
 .Footer{
 	background-color: #434A54;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	padding-top: 30px;
-	padding-bottom: 30px;
-}
-
-.Footer span {
-	margin-left: 5px;
-    margin-right: 5px;
-}
-
-.Footer a {
-	color: #B9B9B9;
-}
-
-.Footer .TOS{
-	color: #B9B9B9;
-    margin-bottom: 15px;
-}
-
-.Footer .COPYRIGHT {
-	color: #B9B9B9;
+	justify-content: center;
+	height: 90px;
 }

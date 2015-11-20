@@ -1,3 +1,19 @@
 /** @define Home; use strict */
-@import 'normalize.css';
 
+.CountInput {
+  background-color: #CCC;
+  padding: 73px 0;
+  position: relative;
+}
+
+.CountInputContent {
+  margin: 0 auto;
+  max-width: 1190px;
+  width: 95%;
+}
+
+.CountInputContent-Title {
+  margin-bottom: 23px;
+  font-size: 24px;
+  font-weight: 500;
+}

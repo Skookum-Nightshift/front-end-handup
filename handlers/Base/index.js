@@ -12,7 +12,7 @@ class AppBase extends React.Component {
   render(): ?ReactElement {
     return (
       <div className="AppBase">
-      	<Header />
+        <Header />
         <RouteHandler />
         <Footer />
       </div>

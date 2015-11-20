@@ -4,6 +4,7 @@ require('./styles.css');
 import React from 'react';
 import Button from 'Button';
 import LoggedInHandler from 'LoggedInHandler';
+import {Link} from 'react-router';
 
 var {PropTypes} = React;
 
@@ -13,69 +14,60 @@ class Header extends LoggedInHandler {
     super();
 
     this.state.redirectTo = 'none';
-
-    this.handleLogout = this.handleLogout.bind(this);
+    this.state.pastImage = false;
   }
 
-  handleLogout(){
-    this.logoutUser();
-    this.context.router.transitionTo('home');
+  componentDidMount() {
+    this.watchUser();
+    this.handleNoUser();
+
+    document.onscroll = (event) => {
+      if (window.location.pathname !== '/') { return; }
+      let {pastImage} = this.state;
+      if (!pastImage && document.body.scrollTop > 681) {
+        this.setState({pastImage: true});
+      } else if (pastImage && document.body.scrollTop < 681) {
+        this.setState({pastImage: false});
+      }
+    };
   }
 
   render(): ?ReactElement {
 
-    var {children, type, ...props} = this.props,
-          className = `Header is-${type}`;
+    if (typeof window === 'undefined') { return <div></div>; }
 
-    let unAuthNav = (
-        <div className="Header-TopNav">
-          <div className="Header-TopNav-Logo">
-            <a href="#">
-              <img src="./public/images/logo.png" alt="Logo"/>
-            </a>
-          </div>
-          <div className="Header-TopNav-AuthNav">
-            <a className="Header-TopNav-Register" href="register">Create Account</a><a className="Header-TopNav-Login" href="login">Login</a>
-          </div>   
-        </div>
-    );
+    let {user, pastImage} = this.state;
 
-    let authNav = "";
-
-    if(this.state.user){
-      let {user} = this.state;
-      authNav = (
-        
-          <div className="Header-TopNav">
-            <div className="Header-TopNav-Logo">
-              <a href="#">
-                <img src="./public/images/logo.png" alt="Logo"/>
-              </a>
-            </div>
-            <div>
-              <p>Welcome {user.first_name} | <a href="" onClick={this.handleLogout} >Logout</a></p>
-            </div>     
-          </div>
-      );
-    }
-
-    var authClass = this.state.user ? "-Auth" : "";
+    let nav = user ? (
+                <div className="Header-TopNav-AuthNav">
+                  <p>Welcome {user.first_name} | <a href="" onClick={this.logoutUser} >Logout</a></p>
+                </div>
+              ) : (
+                <div className="Header-TopNav-AuthNav">
+                  <Link className="Header-TopNav-Register" to="/register">Create Account</Link>
+                  <Link className="Header-TopNav-Login" to="/login">Login</Link>
+                </div>
+              );
 
     return (
-      <div className={"Header"+authClass}>
-          { this.state.user ? authNav : unAuthNav }      
+      <div className={'Header' + (window.location.pathname === '/' ? ' is_home' : '')}>
+        <div className={'Header-TopNav' + (window.location.pathname === '/' ? (pastImage ? ' is_past' : '') : ' is_past')}>
+          <div className="Header-TopNav-Logo">
+            <Link to="/">
+              <img src="./public/images/logo.png" alt="Logo"/>
+            </Link>
+          </div>
+          { nav }
+        </div>
       </div>
     );
   }
 }
 
 Header.propTypes = {
-  type: PropTypes.oneOf(['black', 'grey', 'pink', 'white']),
-  children: PropTypes.any.isRequired,
 };
 
 Header.defaultProps = {
-  type: 'black',
 };
 
 export default Header;

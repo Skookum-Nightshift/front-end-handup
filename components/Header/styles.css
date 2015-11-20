@@ -1,43 +1,59 @@
-.Header{
-	background: url('/public/images/banner_span.png') no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	flex: 1;
+.Header {
+  flex: 1;
+  height: 128px;
+  background: #434343;
 }
 
-.Header-Auth{
-	background: #434343;
-	height: 122px;
-	flex: 1;
+.Header.is_home {
+  height: 681px;
+  background: url('/public/images/banner_span.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.Header-Auth {
+  background: #434343;
+  height: 122px;
+  flex: 1;
 }
 
 .Header-TopNav {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;/* I should probably be using @media here to make staking look a lot better */
-	margin: 38px 100px 0px 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;/* I should probably be using @media here to make staking look a lot better */
+  padding-top: 33px;
+  position: fixed;
+  width: 100vw;
+  height: 128px;
+  transition: all 300ms ease;
+  z-index: 1000;
+}
+
+.Header-TopNav.is_past {
+  background: #434343;
+  transition: all 300ms ease;
+}
+
+.Header-TopNav-AuthNav {
+  margin-right: 137px;
+  margin-top: 2px;
 }
 
 .Header-TopNav-Login{
-	margin-left: 29px;
-	color: #FFFFFF;
+  margin-left: 29px;
+  color: #FFFFFF;
 }
 
 .Header-TopNav-Register {
-	/* Rectangle 1: */
-	background: #FFFFFF;
-	border-radius: 40px;
-	/* Create Account: */
-	font-family: OpenSans-Semibold;
-	font-size: 16px;
-	color: #4A4A4A;
-	line-height: 22px;
-	/* Rectangle 1 + Create Account Copy: */
-	padding: 18px 27px 17px 37px;
+  background: #FFFFFF;
+  border-radius: 40px;
+  font-family: OpenSans-Semibold, sans-serif;
+  font-size: 16px;
+  color: #4A4A4A;
+  line-height: 22px;
+  padding: 18px 27px 17px 37px;
+  display: inline-block;
 }
 
-.Main {
-	/*border: 5px solid black;*/
+.Header-TopNav-Logo {
+  margin-left: 137px;
 }

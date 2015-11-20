@@ -1,0 +1,89 @@
+/** @define CountInput; use strict */
+
+.CountInputOptions {
+  display: flex;
+}
+
+.PriceButtons {
+  display: flex;
+  max-width: 885px;
+  flex: 8;
+}
+
+.PriceButton {
+  flex: 1;
+  margin-right: 30px;
+  font-size: 48px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.PriceButton:hover {
+  color: #FFF;
+  background-color: rgba(102,102,102, 0.5);
+}
+
+.PriceButton.is_selected {
+  color: #FFF;
+  background-color: #666;
+}
+
+.PriceButton .PriceButton-Price {
+  vertical-align: top;
+}
+
+.PriceButton .PriceButton-Sign {
+  vertical-align: top;
+  font-size: 21px;
+  margin-top: -5px;
+  display: inline-block;
+}
+
+.CountInput-Quantity {
+  flex: 1;
+  height: 100px;
+  display: relative;
+}
+
+.CountInput-Quantity .CountInput-QuantityTitle {
+  font-size: 23px;
+  line-height: 32px;
+}
+
+.CountInput-Quantity .CountInput-QuantityInput {
+  border-radius: 8px;
+  font-size: 25px;
+  color: #494949;
+  border: none;
+  text-align: center;
+  height: 68px;
+  width: 100%;
+}
+
+.CountInput-Quantity .CountInput-QuantityInput:focus {
+  outline: none;
+  position: relative;
+  box-shadow: 0px 0px 10px 2px rgba(201,201,201,0.50);
+  z-index: 2;
+}
+
+.CountInput-Total {
+  flex: 2;
+  display: relative;
+}
+
+.CountInput-TotalWrapper {
+  height: 100px;
+  background: #fff;
+  color: #9B9B9B;
+  line-height: 100px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 48px;
+  margin-left: 100px;
+  width: calc(100% - 100px)
+}

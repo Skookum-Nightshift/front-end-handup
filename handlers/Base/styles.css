@@ -2,10 +2,10 @@
 @import 'normalize.css';
 
 .AppBase {
-	display: flex;
-	min-height: 100vh;
-  	flex-direction: column;
-  	justify-content: center;
-   	align-content: center;
-   	align-items: stretch;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: stretch;
 }

@@ -53,33 +53,34 @@ class Input extends React.Component {
   }
 
   render(): ?ReactElement {
-    var requiredClass = this.props.isRequired ? 'Input--required' : '';
+    let {className, isRequired, onChange, onKeyUp, ref, type, name, onInputChange, ...props} = this.props;
 
-    if (this.props.type === 'monthYear') {
+    let requiredClass = isRequired ? 'Input--required' : '';
+
+    let inputClassName = 'Input ' + requiredClass + '' + (className || '');
+
+    if (type === 'monthYear') {
       return (
-        <input style={this.props.style} type="text" ref="inputField"
-          className={'Input ' + requiredClass}
-          placeholder={this.props.placeholder}
-          onChange={this.onInputChange}
-          onKeyUp={this.onInputKeyDown}
-          autoFocus={this.props.autoFocus} />
+        <input type="text" ref="inputField" className={inputClassName}
+          onChange={this.onInputChange} onKeyUp={this.onInputKeyDown} {...props} />
       );
     }
 
     return (
-      <input defaultValue={this.props.defaultValue} style={this.props.style}
-        type={this.props.type} ref="inputField"
-        className={'Input ' + requiredClass}
-        placeholder={this.props.placeholder}
-        onChange={this.onInputChange}
-        autoFocus={this.props.autoFocus} />
+      <input type={type} ref="inputField" className={inputClassName}
+        onChange={this.onInputChange} {...props} />
     );
   }
 }
 
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};
+
 Input.defaultPropTypes = {
-  type: 'text',
-  autoFocus: false,
+  type: 'text'
 };
 
 export default Input;

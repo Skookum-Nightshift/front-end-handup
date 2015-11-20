@@ -1,0 +1,20 @@
+/** @define BaseFrom; use strict */
+
+.AppBody {
+  padding: 73px 0;
+  position: relative;
+}
+
+.AppBody-Center {
+  margin: 0 auto;
+  max-width: 1190px;
+  width: 95%;
+}
+
+.AppTitle {
+  border-bottom: 1px solid #979797;
+  font-size: 48px;
+  line-height: 100px;
+  height: 100px;
+  padding-left: 85px;
+}

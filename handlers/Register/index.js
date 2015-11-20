@@ -225,7 +225,7 @@ class Register extends React.Component {
 					   			<Input type="checkbox" name="notification" onInputChange={this.updateState}/>				   	
 					   		</div>
 					   		<div className="Right">
-								<Button className="button" onClick={this.handleSubmit} className="button" type="pink">Register</Button>
+								<Button className="button" onClick={this.handleSubmit} type="pink">Register</Button>
 					   		</div>
 					   	</div>
 
